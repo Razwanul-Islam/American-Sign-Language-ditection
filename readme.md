@@ -15,4 +15,5 @@ To run this project, you need to have Python 3.10.* installed on your system. Af
 To run the ASL detection, you can either run the live-detection.py file directly or use the following command in the command prompt/terminal:
 
 ```python live-detection.py```
+
 This will start the real-time ASL detection system. You can then use your webcam to make hand gestures and the system will detect and display the corresponding ASL alphabets.
