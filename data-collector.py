@@ -9,9 +9,9 @@ cap = cv2.VideoCapture(0)
 # Initialize hand ditector, ditect maximum one hand
 hand_ditector = HandDetector(maxHands=1)
 # this offset is nothing but margin in bounding box
-offset = 20
+offset = 10
 # directory of saved data
-directory='dataset_2/train/'
+directory='dataset_gray_244/train/'
 # A infinity loop to continiously capture image and process
 while True:
     # capture image from camera returns two thing first one is boolean variable and second one is image
@@ -84,77 +84,66 @@ while True:
         px1 = 0 if px1<0 else px1
         # croped frame of ony hand
         croped_frame = img[py1:py2,px1:px2]
-        # making a white screen
-        white_screen = np.ones((300,300,3),np.uint8)*255
-        # positioning croped frame into white screen for a fixed size image of (300,300)
-        hand_ratio = w/h
-        if hand_ratio > 1:
-            wcal = ceil(300/hand_ratio)
-            croped_frame = cv2.resize(croped_frame,(300,wcal))
-            gap = ceil((300-wcal)/2)
-            white_screen[0+gap:wcal+gap,0:300] = croped_frame
-        else:
-            hcal = ceil(300*hand_ratio)
-            croped_frame = cv2.resize(croped_frame,(hcal,300))
-            gap = ceil((300-hcal)/2)
-            white_screen[0:300,0+gap:hcal+gap] = croped_frame
-        # show fixed size image (300,300) of only hand
-        cv2.imshow("Croped frame",white_screen)
+        croped_frame = cv2.resize(croped_frame,(244,244))
+        croped_frame = cv2.cvtColor(croped_frame, cv2.COLOR_BGR2GRAY)
+        # Merge the grayscale image with the original image's RGB channels
+        croped_frame = cv2.cvtColor(croped_frame, cv2.COLOR_GRAY2BGR)
+        cv2.imshow("Croped frame",croped_frame)
         # wait 10ms to get key pressed event from keyboard
         interrupt = cv2.waitKey(10)
         # when a key pressed save current whiteframe(fixed size hand gesture image
         # ) to defined related path
         if interrupt & 0xFF == ord('a'):
-            cv2.imwrite(directory+'A/'+str(count['a'])+'.png',white_screen)
+            cv2.imwrite(directory+'A/'+str(count['a'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('b'):
-            cv2.imwrite(directory+'B/'+str(count['b'])+'.png',white_screen)
+            cv2.imwrite(directory+'B/'+str(count['b'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('c'):
-            cv2.imwrite(directory+'C/'+str(count['c'])+'.png',white_screen)
+            cv2.imwrite(directory+'C/'+str(count['c'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('d'):
-            cv2.imwrite(directory+'D/'+str(count['d'])+'.png',white_screen)
+            cv2.imwrite(directory+'D/'+str(count['d'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('e'):
-            cv2.imwrite(directory+'E/'+str(count['e'])+'.png',white_screen)
+            cv2.imwrite(directory+'E/'+str(count['e'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('f'):
-            cv2.imwrite(directory+'F/'+str(count['f'])+'.png',white_screen)
+            cv2.imwrite(directory+'F/'+str(count['f'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('g'):
-            cv2.imwrite(directory+'G/'+str(count['g'])+'.png',white_screen)
+            cv2.imwrite(directory+'G/'+str(count['g'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('h'):
-            cv2.imwrite(directory+'H/'+str(count['h'])+'.png',white_screen)
+            cv2.imwrite(directory+'H/'+str(count['h'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('i'):
-            cv2.imwrite(directory+'I/'+str(count['i'])+'.png',white_screen)
+            cv2.imwrite(directory+'I/'+str(count['i'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('j'):
-            cv2.imwrite(directory+'J/'+str(count['j'])+'.png',white_screen)
+            cv2.imwrite(directory+'J/'+str(count['j'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('k'):
-            cv2.imwrite(directory+'K/'+str(count['k'])+'.png',white_screen)
+            cv2.imwrite(directory+'K/'+str(count['k'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('l'):
-            cv2.imwrite(directory+'L/'+str(count['l'])+'.png',white_screen)
+            cv2.imwrite(directory+'L/'+str(count['l'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('m'):
-            cv2.imwrite(directory+'M/'+str(count['m'])+'.png',white_screen)
+            cv2.imwrite(directory+'M/'+str(count['m'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('n'):
-            cv2.imwrite(directory+'N/'+str(count['n'])+'.png',white_screen)
+            cv2.imwrite(directory+'N/'+str(count['n'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('o'):
-            cv2.imwrite(directory+'O/'+str(count['o'])+'.png',white_screen)
+            cv2.imwrite(directory+'O/'+str(count['o'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('p'):
-            cv2.imwrite(directory+'P/'+str(count['p'])+'.png',white_screen)
+            cv2.imwrite(directory+'P/'+str(count['p'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('q'):
-            cv2.imwrite(directory+'Q/'+str(count['q'])+'.png',white_screen)
+            cv2.imwrite(directory+'Q/'+str(count['q'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('r'):
-            cv2.imwrite(directory+'R/'+str(count['r'])+'.png',white_screen)
+            cv2.imwrite(directory+'R/'+str(count['r'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('s'):
-            cv2.imwrite(directory+'S/'+str(count['s'])+'.png',white_screen)
+            cv2.imwrite(directory+'S/'+str(count['s'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('t'):
-            cv2.imwrite(directory+'T/'+str(count['t'])+'.png',white_screen)
+            cv2.imwrite(directory+'T/'+str(count['t'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('u'):
-            cv2.imwrite(directory+'U/'+str(count['u'])+'.png',white_screen)
+            cv2.imwrite(directory+'U/'+str(count['u'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('v'):
-            cv2.imwrite(directory+'V/'+str(count['v'])+'.png',white_screen)
+            cv2.imwrite(directory+'V/'+str(count['v'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('w'):
-            cv2.imwrite(directory+'W/'+str(count['w'])+'.png',white_screen)
+            cv2.imwrite(directory+'W/'+str(count['w'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('x'):
-            cv2.imwrite(directory+'X/'+str(count['x'])+'.png',white_screen)
+            cv2.imwrite(directory+'X/'+str(count['x'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('y'):
-            cv2.imwrite(directory+'Y/'+str(count['y'])+'.png',white_screen)
+            cv2.imwrite(directory+'Y/'+str(count['y'])+'.png',croped_frame)
         if interrupt & 0xFF == ord('z'):
-            cv2.imwrite(directory+'Z/'+str(count['z'])+'.png',white_screen)
+            cv2.imwrite(directory+'Z/'+str(count['z'])+'.png',croped_frame)
     # show main frame
     cv2.imshow("Hand Ditector",img)
